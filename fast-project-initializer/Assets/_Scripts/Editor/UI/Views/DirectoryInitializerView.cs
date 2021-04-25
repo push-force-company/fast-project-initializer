@@ -4,10 +4,17 @@ namespace PushForce.FastProjectInitializer.UI
 {
 	public class DirectoryInitializerView : IView
 	{
-		public void drawGUI()
+		private readonly string label;
+		
+		public DirectoryInitializerView(string label)
 		{
-			GUI.Label(new Rect(25, 75, 200, 50), "Test Label");
-			if (GUI.Button(new Rect(25, 25, 200, 50), "Restart"))
+			this.label = label;
+		}
+		
+		public void DrawGUI()
+		{
+			GUILayout.Label(label);
+			if (GUILayout.Button("Restart"))
 			{
 				Debug.Log("click");
 			}

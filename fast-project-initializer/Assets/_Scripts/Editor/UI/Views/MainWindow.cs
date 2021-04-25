@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using PushForce.FastProjectInitializer.Keys;
 using Zenject;
 
 namespace PushForce.FastProjectInitializer.UI
@@ -16,7 +15,7 @@ namespace PushForce.FastProjectInitializer.UI
 		public static void OpenWindow()
 		{
 			var window = GetWindow<MainWindow>();
-			window.titleContent = new GUIContent(TextConst.TITLE);
+			window.titleContent = new GUIContent(TITLE);
 			window.Show();
 		}
 
