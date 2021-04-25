@@ -2,7 +2,7 @@
 
 namespace PushForce.FastProjectInitializer.UI
 {
-	public class ToolbarPanel : IToolbarPanel
+	public abstract class ToolbarPanel
 	{
 		private readonly IView[] views;
 		private readonly string[] toolbarNames;
@@ -10,7 +10,7 @@ namespace PushForce.FastProjectInitializer.UI
 
 		public IView CurrentView => views[currentViewIndex];
 		
-		public ToolbarPanel(IView[] views, string[] toolbarNames)
+		protected ToolbarPanel(IView[] views, string[] toolbarNames)
 		{
 			this.views = views;
 			this.toolbarNames = toolbarNames;
