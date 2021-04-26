@@ -1,13 +1,12 @@
 using UnityEditor;
 using UnityEngine;
+using PushForce.FastProjectInitializer.Keys;
 using Zenject;
 
 namespace PushForce.FastProjectInitializer.UI
 {
 	public class MainWindow : ZenjectEditorWindow
 	{
-		public const string TITLE = "Fast Project Initializer";
-		
 		private readonly IView directoryInitializerView = new DirectoryInitializerView();
 		
 		public override void InstallBindings()
@@ -17,7 +16,7 @@ namespace PushForce.FastProjectInitializer.UI
 		public static void OpenWindow()
 		{
 			var window = GetWindow<MainWindow>();
-			window.titleContent = new GUIContent(TITLE);
+			window.titleContent = new GUIContent(TextConst.TITLE);
 			window.Show();
 		}
 
