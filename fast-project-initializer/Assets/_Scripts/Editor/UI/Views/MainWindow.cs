@@ -1,16 +1,23 @@
+using PushForce.FastProjectInitializer.Installers;
+using PushForce.FastProjectInitializer.Keys;
 using UnityEditor;
 using UnityEngine;
-using PushForce.FastProjectInitializer.Keys;
 using Zenject;
 
 namespace PushForce.FastProjectInitializer.UI
 {
 	public class MainWindow : ZenjectEditorWindow
 	{
-		private readonly IView directoryInitializerView = new DirectoryInitializerView();
+		[Inject]
+		private ToolbarPanel toolbarPanel;
 		
 		public override void InstallBindings()
-		{}
+		{
+			DirectoryInitializerViewInstaller.Install(Container);
+			HierarchyInitializerViewInstaller.Install(Container);
+			MainToolbarPanelInstaller.Install(Container);
+			Container.Inject(this);
+		}
 		
 		[MenuItem("Window/PushForce/FastProjectInitializer")]
 		public static void OpenWindow()
@@ -23,7 +30,8 @@ namespace PushForce.FastProjectInitializer.UI
 		public override void OnGUI()
 		{
 			base.OnGUI();
-			directoryInitializerView.drawGUI();
+			toolbarPanel.DrawGUI();
+			toolbarPanel.CurrentView.DrawGUI();
 		}
 	}
 }

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace PushForce.FastProjectInitializer.UI
 {
-	public class DirectoryInitializerView : IView
+	public class HierarchyInitializerView : IView
 	{
-		private const string LABEL = "Directory Initialization";
+		private const string LABEL = "Hierarchy Initialization";
 		
 		public void DrawGUI()
 		{
