@@ -363,3 +363,6 @@ TSWLatexianTemp*
 *.orig
 *.orig.meta
 *.blend1.meta
+
+fast-project-initializer/Assets/Plugins/RainbowAssets/
+fast-project-initializer/Assets/Plugins/RainbowAssets.meta
