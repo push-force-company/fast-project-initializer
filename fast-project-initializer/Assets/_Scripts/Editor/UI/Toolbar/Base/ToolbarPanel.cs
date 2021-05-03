@@ -18,7 +18,7 @@ namespace PushForce.FastProjectInitializer.UI
 		
 		public void DrawGUI()
 		{
-			currentViewIndex = GUILayout.Toolbar(currentViewIndex, toolbarNames);
+			currentViewIndex = GUILayout.Toolbar(currentViewIndex, toolbarNames, GUILayout.Height(30));
 		}
 	}
 }
