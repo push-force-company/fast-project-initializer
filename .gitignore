@@ -364,5 +364,10 @@ TSWLatexianTemp*
 *.orig.meta
 *.blend1.meta
 
+# =============== #
+#     Plugins     #
+# =============== #
 fast-project-initializer/Assets/Plugins/RainbowAssets/
 fast-project-initializer/Assets/Plugins/RainbowAssets.meta
+fast-project-initializer/Assets/Plugins/ConsolePro/
+fast-project-initializer/Assets/Plugins/ConsolePro.meta
