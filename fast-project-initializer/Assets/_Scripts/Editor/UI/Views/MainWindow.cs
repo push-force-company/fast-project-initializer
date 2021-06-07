@@ -13,6 +13,7 @@ namespace PushForce.FastProjectInitializer.UI
 		
 		public override void InstallBindings()
 		{
+			DirectoryCreatorInstaller.Install(Container);
 			DirectoryInitializerViewInstaller.Install(Container);
 			HierarchyInitializerViewInstaller.Install(Container);
 			MainToolbarPanelInstaller.Install(Container);
