@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using PushForce.FastProjectInitializer.DirectoryInitialization;
 using PushForce.FastProjectInitializer.Keys;
+using UnityEditor;
 using UnityEngine;
 
 namespace PushForce.FastProjectInitializer.UI
@@ -7,6 +9,10 @@ namespace PushForce.FastProjectInitializer.UI
 	public class DirectoryInitializerView : IView
 	{
 		private readonly IDirectoryCreator directoryCreator;
+		private List<string> list = new List<string>();
+		StringListHolder listHolder = ScriptableObject.CreateInstance<StringListHolder>();
+		SerializedObject serializedObject;
+		
 		
 		// TODO: to be removed
 		string text = "**************************************\nDelete this file after placing some files in this directory\n**************************************";
@@ -14,6 +20,7 @@ namespace PushForce.FastProjectInitializer.UI
 		protected DirectoryInitializerView(IDirectoryCreator directoryCreator)
 		{
 			this.directoryCreator = directoryCreator;
+			serializedObject = new SerializedObject(listHolder);
 		}
 		
 		public void DrawGUI()
@@ -45,6 +52,10 @@ namespace PushForce.FastProjectInitializer.UI
 				                                     "************************************************************";
 				directoryCreator.CreateDirectories();
 			}
+			
+			SerializedProperty serializedProperty = serializedObject.FindProperty("list");
+			EditorGUILayout.PropertyField(serializedProperty, true);
+			list = StringListElement.Draw(list);
 		}
 	}
 }
