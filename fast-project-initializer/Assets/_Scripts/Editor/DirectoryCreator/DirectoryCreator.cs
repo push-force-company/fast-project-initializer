@@ -22,9 +22,7 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 				string path = PATH_PREFIX + directoryPath;
 				if(!Directory.Exists(path))
 				{
-					Directory.CreateDirectory(path);
-					AssetDatabase.ImportAsset(path);
-					CreateReadMeFile(path);
+					CreateDirectoryAtPath(path);
 				}
 				else
 				{
@@ -34,14 +32,48 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 			AssetDatabase.Refresh();
 		}
 		
+		private void CreateDirectoryAtPath(string path)
+		{
+			try
+			{
+				Directory.CreateDirectory(path);
+				AssetDatabase.ImportAsset(path);
+				CreateReadMeFile(path);
+			}
+			catch(PathTooLongException)
+			{
+				Debug.LogError(string.Format(TextConst.EXCEPTION_PATH_TO_LONG, path));
+			}
+			catch (IOException)
+			{
+				Debug.LogError(string.Format(TextConst.EXCEPTION_DIRECTORY_IO, path));
+			}
+			catch(UnauthorizedAccessException)
+			{
+				Debug.LogError(TextConst.EXCEPTION_FILE_UNAUTHORIZED_ACCESS);
+			}
+			catch(ArgumentNullException)
+			{
+				Debug.LogError(string.Format(TextConst.EXCEPTION_DIRECTORY_ARGUMENT, path));
+			}
+			catch(ArgumentException)
+			{
+				Debug.LogError(TextConst.EXCEPTION_DIRECTORY_ARGUMENT_NULL);
+			}
+			catch(Exception e)
+			{
+				Debug.LogError(e);
+			}
+		}
+		
 		private void CreateReadMeFile(string path)
 		{
 			path += README_FILE_NAME;
-			CreateFile(path, ReadMeFileContent);
+			CreateFileAtPathWithContent(path, ReadMeFileContent);
 			AssetDatabase.ImportAsset(path);
 		}
 		
-		private void CreateFile(string path, string content)
+		private void CreateFileAtPathWithContent(string path, string content)
 		{
 			try
 			{
@@ -55,7 +87,7 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 			}
 			catch(UnauthorizedAccessException)
 			{
-				Debug.LogError(TextConst.EXCEPTION_UNAUTHORIZED_ACCESS);
+				Debug.LogError(TextConst.EXCEPTION_FILE_UNAUTHORIZED_ACCESS);
 			}
 			catch(PathTooLongException)
 			{
@@ -63,7 +95,11 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 			}
 			catch(IOException)
 			{
-				Debug.LogError(string.Format(TextConst.EXCEPTION_IO, path));
+				Debug.LogError(string.Format(TextConst.EXCEPTION_FILE_IO, path));
+			}
+			catch(Exception e)
+			{
+				Debug.LogError(e);
 			}
 		}
 	}
