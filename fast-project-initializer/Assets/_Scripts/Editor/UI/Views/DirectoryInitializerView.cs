@@ -1,17 +1,15 @@
 using System.Collections.Generic;
 using PushForce.FastProjectInitializer.DirectoryInitialization;
 using PushForce.FastProjectInitializer.Keys;
-using UnityEditor;
 using UnityEngine;
 
 namespace PushForce.FastProjectInitializer.UI
 {
 	public class DirectoryInitializerView : IView
 	{
-		private readonly IDirectoryCreator directoryCreator;
 		private List<string> list = new List<string>();
-		StringListHolder listHolder = ScriptableObject.CreateInstance<StringListHolder>();
-		SerializedObject serializedObject;
+		private readonly StringListElement listElement;
+		IDirectoryCreator directoryCreator;
 		
 		
 		// TODO: to be removed
@@ -20,7 +18,7 @@ namespace PushForce.FastProjectInitializer.UI
 		protected DirectoryInitializerView(IDirectoryCreator directoryCreator)
 		{
 			this.directoryCreator = directoryCreator;
-			serializedObject = new SerializedObject(listHolder);
+			listElement = new StringListElement(list);
 		}
 		
 		public void DrawGUI()
@@ -53,9 +51,15 @@ namespace PushForce.FastProjectInitializer.UI
 				directoryCreator.CreateDirectories();
 			}
 			
-			SerializedProperty serializedProperty = serializedObject.FindProperty("list");
-			EditorGUILayout.PropertyField(serializedProperty, true);
-			list = StringListElement.Draw(list);
+			listElement.Draw();
+			if (GUILayout.Button("Proceed"))
+			{
+				Debug.Log(list.Count);
+				foreach (string element in list)
+				{
+					Debug.Log(element);
+				}
+			}
 		}
 	}
 }

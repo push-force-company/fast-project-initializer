@@ -4,18 +4,27 @@ using UnityEngine;
 
 namespace PushForce.FastProjectInitializer.UI
 {
-	public static class StringListElement
+	public class StringListElement
 	{
 		private const string LIST_PROPERTY = "list";
 		
-		public static List<string> Draw(List<string> list)
+		private readonly SerializedProperty listProperty;
+		
+		private Vector2 scrollPosition = Vector2.zero;
+
+		public StringListElement(List<string> list)
 		{
 			var listHolder = ScriptableObject.CreateInstance<StringListHolder>();
 			listHolder.list = list;
 			var serializedObject = new SerializedObject(listHolder);
-			SerializedProperty serializedProperty = serializedObject.FindProperty(LIST_PROPERTY);
-			EditorGUILayout.PropertyField(serializedProperty, true);
-			return listHolder.list;
+			listProperty = serializedObject.FindProperty(LIST_PROPERTY);
+		}
+		
+		public void Draw()
+		{
+			scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+			EditorGUILayout.PropertyField(listProperty, true);
+			EditorGUILayout.EndScrollView();
 		}
 	}
 }
