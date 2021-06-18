@@ -7,11 +7,13 @@ namespace PushForce.FastProjectInitializer.UI
 	public class DirectoryInitializerView : IView
 	{
 		private readonly IDirectoryCreator directoryCreator;
+		private readonly DirectoryCreatorSettings settings;
 		private readonly StringListElement directoriesToCreate;
 		
-		protected DirectoryInitializerView(IDirectoryCreator directoryCreator)
+		protected DirectoryInitializerView(IDirectoryCreator directoryCreator, DirectoryCreatorSettings settings)
 		{
 			this.directoryCreator = directoryCreator;
+			this.settings = settings;
 			directoriesToCreate = new StringListElement(directoryCreator.DirectoriesToCreate);
 		}
 		
