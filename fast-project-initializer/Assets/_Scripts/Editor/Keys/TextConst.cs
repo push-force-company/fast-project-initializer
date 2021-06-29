@@ -4,8 +4,22 @@ namespace PushForce.FastProjectInitializer.Keys
 	{
 		public const string TITLE = "Fast Project Initializer";
 		
-		public const string DIRECTORY_INITIALIZER_FUNCTIONALITY_INFO = "Information about active functionality...";
+		public const string FUNCTIONALITY_INFO = "Information about active functionality...";
+		public const string PARAMETERS = "Parameters";
+		public const string PREFIX = "Prefix";
+		public const string SUFFIX = "Suffix";
+		public const string EXAMPLE_PREFIX = "ExamplePrefix";
+		public const string EXAMPLE_SUFFIX = "ExampleSuffix";
+		public const string SETTINGS = "Settings";
+		public const string README_TEXT_INFO = "Enter the text that will be placed in a text file inside the " +
+		                                       "directory...";
+		public const string EXAMPLE_README = "***********************************************************\n" +
+		                                     "Delete this file after placing some files in this directory\n" +
+		                                     "***********************************************************";
 		
+		public const string BUTTON_PROCEED = "Proceed";
+		
+		public const string WARNING_DIRECTORY_NAME_EMPTY = "Encountered empty directory name - skipping";
 		public const string WARNING_DIRECTORY_ALREADY_EXISTS = "Directory \"{0}\" already exists - skipping";
 		
 		public const string EXCEPTION_SECURITY = "You don't have required permission.";

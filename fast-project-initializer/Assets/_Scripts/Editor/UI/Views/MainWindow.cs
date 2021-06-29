@@ -11,7 +11,7 @@ namespace PushForce.FastProjectInitializer.UI
 		private const float MIN_WINDOW_SIZE = 300;
 		
 		[Inject]
-		private ToolbarPanel toolbarPanel;
+		private IView directoryInitializerView;
 		
 		private Vector2 scrollPosition;
 		
@@ -19,8 +19,6 @@ namespace PushForce.FastProjectInitializer.UI
 		{
 			DirectoryCreatorInstaller.Install(Container);
 			DirectoryInitializerViewInstaller.Install(Container);
-			HierarchyInitializerViewInstaller.Install(Container);
-			MainToolbarPanelInstaller.Install(Container);
 			Container.Inject(this);
 		}
 		
@@ -37,8 +35,7 @@ namespace PushForce.FastProjectInitializer.UI
 		{
 			base.OnGUI();
 			scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-			toolbarPanel.DrawGUI();
-			toolbarPanel.CurrentView.DrawGUI();
+			directoryInitializerView.DrawGUI();
 			GUILayout.EndScrollView();
 		}
 	}

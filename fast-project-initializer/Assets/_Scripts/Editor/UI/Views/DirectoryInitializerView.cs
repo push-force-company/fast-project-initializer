@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using PushForce.FastProjectInitializer.DirectoryInitialization;
 using PushForce.FastProjectInitializer.Keys;
 using UnityEngine;
@@ -7,59 +6,47 @@ namespace PushForce.FastProjectInitializer.UI
 {
 	public class DirectoryInitializerView : IView
 	{
-		private List<string> list = new List<string>();
-		private readonly StringListElement listElement;
-		IDirectoryCreator directoryCreator;
-		
-		
-		// TODO: to be removed
-		string text = "**************************************\nDelete this file after placing some files in this directory\n**************************************";
+		private readonly IDirectoryCreator directoryCreator;
+		private readonly StringListElement directoriesToCreate;
 		
 		protected DirectoryInitializerView(IDirectoryCreator directoryCreator)
 		{
 			this.directoryCreator = directoryCreator;
-			listElement = new StringListElement(list);
+			directoriesToCreate = new StringListElement(directoryCreator.DirectoriesToCreate);
 		}
 		
 		public void DrawGUI()
 		{
-			InfoBox.Draw(TextConst.DIRECTORY_INITIALIZER_FUNCTIONALITY_INFO);
-			
-			// TODO: change this mess into a valid view implementation
-			BoxGroup.Begin("Parameters");
-				GUILayout.BeginHorizontal();
-					GUILayout.Label("Prefix", GUILayout.MaxWidth(200));
-					GUILayout.TextField("ExamplePrefix");
-				GUILayout.EndHorizontal();
-				GUILayout.BeginHorizontal();
-					GUILayout.Label("Suffix", GUILayout.MaxWidth(200));
-					GUILayout.TextField("ExampleSuffix");
-				GUILayout.EndHorizontal();
-			BoxGroup.End();
-			BoxGroup.Begin("Settings");
-				InfoBox.Draw(TextConst.DIRECTORY_INITIALIZER_FUNCTIONALITY_INFO);
-				text = GUILayout.TextArea(text);
-				GUILayout.Toggle(false, "Clear up project");
-			BoxGroup.End();
-			
-			if (GUILayout.Button("Proceed"))
+			InfoBox.Draw(TextConst.FUNCTIONALITY_INFO);
+			DrawParametersBoxGroup();
+			DrawSettingsBoxGroup();
+			if (GUILayout.Button(TextConst.BUTTON_PROCEED))
 			{
-				directoryCreator.DirectoriesToCreate = new []{ "Dupa", "Dupa1", "Dupa2/Dupa" };
-				directoryCreator.ReadMeFileContent = "************************************************************\n" +
-				                                     "Delete this file after placing some files int this directory\n" +
-				                                     "************************************************************";
 				directoryCreator.CreateDirectories();
 			}
-			
-			listElement.Draw();
-			if (GUILayout.Button("Proceed"))
-			{
-				Debug.Log(list.Count);
-				foreach (string element in list)
-				{
-					Debug.Log(element);
-				}
-			}
+		}
+		
+		private void DrawParametersBoxGroup()
+		{
+			BoxGroup.Begin(TextConst.PARAMETERS);
+				GUILayout.BeginHorizontal();
+					GUILayout.Label(TextConst.PREFIX, GUILayout.MaxWidth(200));
+					directoryCreator.Prefix = GUILayout.TextField(directoryCreator.Prefix).Trim();
+				GUILayout.EndHorizontal();
+				GUILayout.BeginHorizontal();
+					GUILayout.Label(TextConst.SUFFIX, GUILayout.MaxWidth(200));
+					directoryCreator.Suffix = GUILayout.TextField(directoryCreator.Suffix).Trim();
+				GUILayout.EndHorizontal();
+			BoxGroup.End();
+		}
+		
+		private void DrawSettingsBoxGroup()
+		{
+			BoxGroup.Begin(TextConst.SETTINGS);
+				InfoBox.Draw(TextConst.README_TEXT_INFO);
+				directoryCreator.ReadMeFileContent = GUILayout.TextArea(directoryCreator.ReadMeFileContent);
+				directoriesToCreate.Draw();
+			BoxGroup.End();
 		}
 	}
 }
