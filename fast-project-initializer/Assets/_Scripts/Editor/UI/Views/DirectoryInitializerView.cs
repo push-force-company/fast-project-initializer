@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PushForce.FastProjectInitializer.DirectoryInitialization;
 using PushForce.FastProjectInitializer.Keys;
 using UnityEngine;
@@ -6,7 +7,10 @@ namespace PushForce.FastProjectInitializer.UI
 {
 	public class DirectoryInitializerView : IView
 	{
-		private readonly IDirectoryCreator directoryCreator;
+		private List<string> list = new List<string>();
+		private readonly StringListElement listElement;
+		IDirectoryCreator directoryCreator;
+		
 		
 		// TODO: to be removed
 		string text = "**************************************\nDelete this file after placing some files in this directory\n**************************************";
@@ -14,6 +18,7 @@ namespace PushForce.FastProjectInitializer.UI
 		protected DirectoryInitializerView(IDirectoryCreator directoryCreator)
 		{
 			this.directoryCreator = directoryCreator;
+			listElement = new StringListElement(list);
 		}
 		
 		public void DrawGUI()
@@ -44,6 +49,16 @@ namespace PushForce.FastProjectInitializer.UI
 				                                     "Delete this file after placing some files int this directory\n" +
 				                                     "************************************************************";
 				directoryCreator.CreateDirectories();
+			}
+			
+			listElement.Draw();
+			if (GUILayout.Button("Proceed"))
+			{
+				Debug.Log(list.Count);
+				foreach (string element in list)
+				{
+					Debug.Log(element);
+				}
 			}
 		}
 	}
