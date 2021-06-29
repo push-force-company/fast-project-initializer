@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using PushForce.FastProjectInitializer.Keys;
@@ -12,14 +13,24 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 		private const string PATH_PREFIX = "Assets/";
 		private const string README_FILE_NAME = "/readme.txt";
 		
-		public string[] DirectoriesToCreate { get; set; }
+		public string Prefix { get; set; }
+		public string Suffix { get; set; }
+		public List<string> DirectoriesToCreate { get; set; }
 		public string ReadMeFileContent { get; set; }
+		
+		public DirectoryCreator()
+		{
+			Prefix = TextConst.EXAMPLE_PREFIX;
+			Suffix = TextConst.EXAMPLE_SUFFIX;
+			ReadMeFileContent = TextConst.EXAMPLE_README;
+			DirectoriesToCreate = new List<string>();
+		}
 		
 		public void CreateDirectories()
 		{
 			foreach (string directoryPath in DirectoriesToCreate)
 			{
-				string path = PATH_PREFIX + directoryPath;
+				string path = PATH_PREFIX + Prefix + directoryPath + Suffix;
 				if(!Directory.Exists(path))
 				{
 					CreateDirectoryAtPath(path);
