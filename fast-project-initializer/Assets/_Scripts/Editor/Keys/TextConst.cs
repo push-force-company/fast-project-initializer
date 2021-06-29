@@ -19,6 +19,7 @@ namespace PushForce.FastProjectInitializer.Keys
 		
 		public const string BUTTON_PROCEED = "Proceed";
 		
+		public const string WARNING_DIRECTORY_NAME_EMPTY = "Encountered empty directory name - skipping";
 		public const string WARNING_DIRECTORY_ALREADY_EXISTS = "Directory \"{0}\" already exists - skipping";
 		
 		public const string EXCEPTION_SECURITY = "You don't have required permission.";

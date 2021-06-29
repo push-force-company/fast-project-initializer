@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using ModestTree;
 using PushForce.FastProjectInitializer.Keys;
 using UnityEditor;
 using UnityEngine;
@@ -30,6 +31,12 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 		{
 			foreach (string directoryPath in DirectoriesToCreate)
 			{
+				if(directoryPath.IsEmpty())
+				{
+					Debug.LogWarning(TextConst.WARNING_DIRECTORY_NAME_EMPTY);
+					continue;
+				}
+				
 				string path = PATH_PREFIX + Prefix + directoryPath + Suffix;
 				if(!Directory.Exists(path))
 				{
