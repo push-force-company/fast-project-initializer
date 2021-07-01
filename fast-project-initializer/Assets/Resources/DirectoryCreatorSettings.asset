@@ -13,5 +13,12 @@ MonoBehaviour:
   m_Name: DirectoryCreatorSettings
   m_EditorClassIdentifier: 
   settings:
-    directoriesToCreate:
-    - Dupa
+    prefix: ExamplePrefix
+    suffix: ExampleSuffix
+    readMeFileContent: '***********************************************************
+
+      Delete
+      this file after placing some files in this directory
+
+      ***********************************************************'
+    directoriesToCreate: []

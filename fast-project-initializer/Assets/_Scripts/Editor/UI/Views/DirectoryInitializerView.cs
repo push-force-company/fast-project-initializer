@@ -14,7 +14,7 @@ namespace PushForce.FastProjectInitializer.UI
 		{
 			this.directoryCreator = directoryCreator;
 			this.settings = settings;
-			directoriesToCreate = new StringListElement(directoryCreator.DirectoriesToCreate);
+			directoriesToCreate = new StringListElement(settings.directoriesToCreate);
 		}
 		
 		public void DrawGUI()
@@ -33,11 +33,11 @@ namespace PushForce.FastProjectInitializer.UI
 			BoxGroup.Begin(TextConst.PARAMETERS);
 				GUILayout.BeginHorizontal();
 					GUILayout.Label(TextConst.PREFIX, GUILayout.MaxWidth(200));
-					directoryCreator.Prefix = GUILayout.TextField(directoryCreator.Prefix).Trim();
+					settings.prefix = GUILayout.TextField(settings.prefix).Trim();
 				GUILayout.EndHorizontal();
 				GUILayout.BeginHorizontal();
 					GUILayout.Label(TextConst.SUFFIX, GUILayout.MaxWidth(200));
-					directoryCreator.Suffix = GUILayout.TextField(directoryCreator.Suffix).Trim();
+					settings.suffix = GUILayout.TextField(settings.suffix).Trim();
 				GUILayout.EndHorizontal();
 			BoxGroup.End();
 		}
@@ -46,7 +46,7 @@ namespace PushForce.FastProjectInitializer.UI
 		{
 			BoxGroup.Begin(TextConst.SETTINGS);
 				InfoBox.Draw(TextConst.README_TEXT_INFO);
-				directoryCreator.ReadMeFileContent = GUILayout.TextArea(directoryCreator.ReadMeFileContent);
+				settings.readMeFileContent = GUILayout.TextArea(settings.readMeFileContent);
 				directoriesToCreate.Draw();
 			BoxGroup.End();
 		}

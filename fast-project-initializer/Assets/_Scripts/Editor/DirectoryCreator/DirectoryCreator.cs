@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using ModestTree;
@@ -14,22 +13,16 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 		private const string PATH_PREFIX = "Assets/";
 		private const string README_FILE_NAME = "/readme.txt";
 		
-		public string Prefix { get; set; }
-		public string Suffix { get; set; }
-		public List<string> DirectoriesToCreate { get; set; }
-		public string ReadMeFileContent { get; set; }
+		private readonly DirectoryCreatorSettings settings;
 		
-		public DirectoryCreator()
+		public DirectoryCreator(DirectoryCreatorSettings settings)
 		{
-			Prefix = TextConst.EXAMPLE_PREFIX;
-			Suffix = TextConst.EXAMPLE_SUFFIX;
-			ReadMeFileContent = TextConst.EXAMPLE_README;
-			DirectoriesToCreate = new List<string>();
+			this.settings = settings;
 		}
 		
 		public void CreateDirectories()
 		{
-			foreach (string directoryPath in DirectoriesToCreate)
+			foreach (string directoryPath in settings.directoriesToCreate)
 			{
 				if(directoryPath.IsEmpty())
 				{
@@ -37,7 +30,7 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 					continue;
 				}
 				
-				string path = PATH_PREFIX + Prefix + directoryPath + Suffix;
+				string path = PATH_PREFIX + settings.prefix + directoryPath + settings.suffix;
 				if(!Directory.Exists(path))
 				{
 					CreateDirectoryAtPath(path);
@@ -87,7 +80,7 @@ namespace PushForce.FastProjectInitializer.DirectoryInitialization
 		private void CreateReadMeFile(string path)
 		{
 			path += README_FILE_NAME;
-			CreateFileAtPathWithContent(path, ReadMeFileContent);
+			CreateFileAtPathWithContent(path, settings.readMeFileContent);
 			AssetDatabase.ImportAsset(path);
 		}
 		
