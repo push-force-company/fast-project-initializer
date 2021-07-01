@@ -1,3 +1,4 @@
+using PushForce.FastProjectInitializer.DirectoryInitialization;
 using PushForce.FastProjectInitializer.Installers;
 using PushForce.FastProjectInitializer.Keys;
 using UnityEditor;
@@ -19,6 +20,7 @@ namespace PushForce.FastProjectInitializer.UI
 		{
 			DirectoryCreatorInstaller.Install(Container);
 			DirectoryInitializerViewInstaller.Install(Container);
+			DirectoryCreatorSettingsInstaller.InstallFromResource("DirectoryCreatorSettings", Container);
 			Container.Inject(this);
 		}
 		

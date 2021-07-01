@@ -8,14 +8,9 @@ namespace PushForce.FastProjectInitializer.Keys
 		public const string PARAMETERS = "Parameters";
 		public const string PREFIX = "Prefix";
 		public const string SUFFIX = "Suffix";
-		public const string EXAMPLE_PREFIX = "ExamplePrefix";
-		public const string EXAMPLE_SUFFIX = "ExampleSuffix";
 		public const string SETTINGS = "Settings";
 		public const string README_TEXT_INFO = "Enter the text that will be placed in a text file inside the " +
 		                                       "directory...";
-		public const string EXAMPLE_README = "***********************************************************\n" +
-		                                     "Delete this file after placing some files in this directory\n" +
-		                                     "***********************************************************";
 		
 		public const string BUTTON_PROCEED = "Proceed";
 		
